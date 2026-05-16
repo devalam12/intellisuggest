@@ -112,7 +112,11 @@ def get_system_prompt(domain: str) -> str:
     return SYSTEM_PROMPT.replace("{json_schema}", f'{{"domain": "{domain}", {schema_fields}: "...extracted values...","confidence": 0.0-1.0}}')
 
 
-@app.get("/")
+# @app.get("/")
+# def root():
+#     return {"status": "IntelliSuggest API running", "version": "1.0.0"}
+
+@app.get("/health")
 def root():
     return {"status": "IntelliSuggest API running", "version": "1.0.0"}
 
