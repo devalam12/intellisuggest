@@ -1,0 +1,25 @@
+<section class="domain-screen">
+  <div class="hero">
+    <h1 class="hero-title">What are you looking for<span class="cursor">_</span></h1>
+    <p class="hero-sub">
+      Tell me what you love in plain English — I'll find what you'll love next.<br/>
+      No ratings. No forms. Just a conversation.
+    </p>
+  </div>
+
+  <div class="domain-grid">
+    <button
+      *ngFor="let d of domains"
+      class="domain-card"
+      [attr.data-domain]="d.id"
+      (click)="select(d.id)"
+    >
+      <span class="domain-icon">{{ d.icon }}</span>
+      <span class="domain-label">{{ d.label }}</span>
+      <span class="domain-desc">{{ d.desc }}</span>
+      <span class="domain-arrow">→</span>
+    </button>
+  </div>
+
+  <p class="footnote">Powered by Claude · No data stored · Free to use</p>
+</section>

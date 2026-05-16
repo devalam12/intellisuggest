@@ -1,0 +1,83 @@
+<!-- Loading state -->
+<div *ngIf="isLoading" class="loading-screen">
+  <div class="spinner"></div>
+  <p class="loading-text">Analyzing your taste profile...</p>
+  <p class="loading-sub">Matching catalog · Ranking by relevance · Writing your reasons</p>
+</div>
+
+<!-- Results -->
+<div *ngIf="!isLoading && recommendations" class="results-screen">
+  <div class="results-header">
+    <h2 class="results-title">Your {{ domain }} matches</h2>
+    <p *ngIf="recommendations.recommendation_rationale" class="results-sub">
+      {{ recommendations.recommendation_rationale }}
+    </p>
+  </div>
+
+  <div class="rec-list">
+    <div
+      *ngFor="let rec of recommendations.recommendations; let i = index"
+      class="rec-card"
+      [class.rec-card-top]="i === 0"
+    >
+      <div class="rec-rank">#{{ i + 1 }}</div>
+      <div class="rec-main">
+        <div class="rec-header">
+          <h3 class="rec-title">{{ rec.title }}</h3>
+          <span class="match-label" [ngClass]="matchLabel(rec.match_score).cls">
+            {{ matchLabel(rec.match_score).text }}
+          </span>
+        </div>
+
+        <div class="score-bar-wrap">
+          <div class="score-bar">
+            <div class="score-fill" [style.width.%]="scorePct(rec.match_score)"></div>
+          </div>
+          <span class="score-pct">{{ scorePct(rec.match_score) }}%</span>
+        </div>
+
+        <p class="rec-why">{{ rec.why_youll_love_it }}</p>
+
+        <div class="rec-tags">
+          <span *ngFor="let tag of rec.vibe_tags" class="vibe-tag">{{ tag }}</span>
+        </div>
+
+        <button class="rec-expand" (click)="toggleExpand(i)">
+          {{ expandedIndex === i ? 'less detail ↑' : 'why this matches ↓' }}
+        </button>
+
+        <div *ngIf="expandedIndex === i" class="rec-detail">
+          <div class="rec-matches">
+            <strong>Matches your taste:</strong>
+            <ul>
+              <li *ngFor="let m of rec.key_matches">✓ {{ m }}</li>
+            </ul>
+          </div>
+          <div *ngIf="rec.potential_caveat" class="rec-caveat">
+            <strong>Heads up:</strong> {{ rec.potential_caveat }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="refine-section">
+    <h4 class="refine-title">Refine your results</h4>
+    <p class="refine-hint">Tell me what to adjust — "less romance", "more recent", "something shorter"</p>
+    <div class="refine-row">
+      <input
+        class="refine-input"
+        [(ngModel)]="feedbackText"
+        (keydown)="handleRefineKey($event)"
+        placeholder="e.g. more mind-bending, less violence..."
+      />
+      <button
+        class="refine-btn"
+        (click)="submitRefine()"
+        [disabled]="!feedbackText.trim() || isRefining"
+      >
+        {{ isRefining ? '...' : 'Re-rank →' }}
+      </button>
+    </div>
+  </div>
+</div>

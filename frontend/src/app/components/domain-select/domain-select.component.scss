@@ -1,0 +1,68 @@
+.domain-screen { padding: 60px 0 40px; }
+
+.hero { margin-bottom: 48px; }
+
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 6vw, 60px);
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.cursor { animation: blink 1s step-end infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+.hero-sub {
+  font-size: 17px;
+  color: var(--text-mid);
+  line-height: 1.7;
+  max-width: 540px;
+}
+
+.domain-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.domain-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 20px;
+  cursor: pointer;
+  text-align: left;
+  position: relative;
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+
+  &[data-domain="movies"] { background: #e8f4fd; }
+  &[data-domain="books"]  { background: #f0faf4; }
+  &[data-domain="careers"]{ background: #fdf4e8; }
+  &[data-domain="restaurants"] { background: #fdf0f0; }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    border-color: var(--text-muted);
+    .domain-arrow { opacity: 1; transform: translateX(0); }
+  }
+}
+
+.domain-icon  { font-size: 28px; margin-bottom: 4px; }
+.domain-label { font-family: var(--font-serif); font-size: 20px; color: var(--text); }
+.domain-desc  { font-size: 13px; color: var(--text-mid); }
+
+.domain-arrow {
+  position: absolute; right: 20px; bottom: 20px;
+  font-size: 18px; color: var(--text-muted);
+  opacity: 0; transform: translateX(-4px);
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+.footnote { font-size: 13px; color: var(--text-muted); font-family: var(--font-mono); }

@@ -1,0 +1,36 @@
+.header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(248, 246, 241, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.header-inner {
+  max-width: 900px; margin: 0 auto;
+  padding: 14px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  background: none; border: none; cursor: pointer; padding: 0;
+}
+.logo-mark {
+  width: 32px; height: 32px;
+  background: var(--text); color: var(--bg);
+  border-radius: 6px;
+  font-family: var(--font-mono); font-size: 12px; font-weight: 500;
+  display: flex; align-items: center; justify-content: center;
+}
+.logo-text { font-family: var(--font-serif); font-size: 18px; color: var(--text); }
+.header-right { display: flex; align-items: center; gap: 12px; }
+.domain-pill {
+  font-size: 12px; font-family: var(--font-mono);
+  background: #e8e4dc; color: #5a5650;
+  padding: 4px 10px; border-radius: 100px;
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+.btn-ghost {
+  font-size: 13px; color: #9a9590;
+  background: none; border: none; border-bottom: 1px solid transparent;
+  cursor: pointer; padding: 4px 0; font-family: sans-serif;
+}
+.main { max-width: 900px; margin: 0 auto; padding: 0 24px; }

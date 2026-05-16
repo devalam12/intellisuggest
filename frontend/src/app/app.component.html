@@ -1,0 +1,19 @@
+<div class="app">
+  <header class="header">
+    <div class="header-inner">
+      <button class="logo" (click)="reset()">
+        <span class="logo-mark">IS</span>
+        <span class="logo-text">IntelliSuggest</span>
+      </button>
+      <div *ngIf="phase !== 'select'" class="header-right">
+        <span class="domain-pill">{{ domain }}</span>
+        <button class="btn-ghost" (click)="reset()">start over</button>
+      </div>
+    </div>
+  </header>
+  <main class="main">
+    <app-domain-select *ngIf="phase === 'select'" (domainSelected)="onDomainSelected($event)"></app-domain-select>
+    <app-chat *ngIf="phase === 'chat'" [domain]="domain!" (preferencesReady)="onPreferencesReady($event)"></app-chat>
+    <app-recommendations *ngIf="phase === 'results'" [recommendations]="recommendations" [preferences]="preferences!" [domain]="domain!" [isLoading]="isLoadingRecs" (refine)="onRefine($event)"></app-recommendations>
+  </main>
+</div>
