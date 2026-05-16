@@ -1,5 +1,8 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+import os
 from pydantic import BaseModel
 from typing import List, Optional
 import anthropic
@@ -222,3 +225,8 @@ No other text, no markdown, just JSON."""
         return json.loads(raw)
     except json.JSONDecodeError:
         raise HTTPException(status_code=500, detail="Failed to parse preferences")
+
+# Serve Angular frontend
+static_dir = os.path.join(os.path.dirname(__file__), "static")
+if os.path.exists(static_dir):
+    app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")
