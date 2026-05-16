@@ -5,7 +5,7 @@ import { ChatMessage, UserPreferences, RecommendationResponse, Domain } from '..
 
 @Injectable({ providedIn: 'root' })
 export class IntelliSuggestService {
-  private baseUrl = 'http://localhost:8000';
+  private baseUrl = 'https://intellisuggest-api.onrender.com';
 
   constructor(private http: HttpClient) {}
 
